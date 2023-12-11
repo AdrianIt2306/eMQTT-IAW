@@ -1,0 +1,11 @@
+2023-12-11 13:51:52,985 - DEBUG - predictor.py:26 | Predicting Decision Tree
+2023-12-11 13:51:52,985 - DEBUG - predictor.py:28 | Predicting Random Forest
+2023-12-11 13:51:52,991 - DEBUG - predictor.py:30 | Predicting MultiLayer Perceptron
+2023-12-11 13:51:52,991 - DEBUG - predictor.py:32 | Predicting Nayve Bayes
+2023-12-11 13:51:52,991 - DEBUG - predictor.py:34 | Predicting GradienBoost
+2023-12-11 13:51:52,992 - DEBUG - predictor.py:36 | Predicting KNN
+2023-12-11 13:51:54,587 - DEBUG - predictor.py:45 | *************         ***********           *************         *********************      ************           ***********            *****************
+2023-12-11 13:51:54,588 - DEBUG - predictor.py:46 | Decision Tree         Nayve Bayes           Random Forest         MultiLayer Perceptron      GradienBoost               KNN                Comparison result
+2023-12-11 13:51:54,588 - DEBUG - predictor.py:47 | *************         ***********           *************         *********************      ************           ***********            *****************
+2023-12-11 13:51:54,588 - DEBUG - predictor.py:50 | dos                   legitimate            dos                   dos                        dos                    dos                    False
+2023-12-11 13:51:54,588 - DEBUG - predictor.py:62 | {"Decision Tree": "dos", "Nayve Bayes": "legitimate", "Random Forest": "dos", "MultiLayer Perceptron": "dos", "GradienBoost": "dos", "KNN": "dos"}
