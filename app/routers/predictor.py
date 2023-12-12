@@ -16,8 +16,9 @@ class Predictor:
         #print(type(raw_packet))
         mapping={0: 'dos', 1: 'legitimate'}
         validation = False
-        results = []
+
         try:
+            results = []
             dfonline = pd.DataFrame(raw_packet)        
             #dfonline = pd.DataFrame.from_dict(raw_packet,orient='index')
             dfonline=dfonline.astype('category')
@@ -43,22 +44,24 @@ class Predictor:
             y_pred_online_names_mlp =  [mapping[i] for i in y_pred_online_mlp]
             y_pred_online_names_gb =  [mapping[i] for i in y_pred_online_gb]
             y_pred_online_names_knn =  [mapping[i] for i in y_pred_online_knn]
+            classifiers = ['Decision Tree', 'Nayve Bayes', 'Random Forest', 'MultiLayer Perceptron', 'GradienBoost', 'KNN']
+            predictions = [y_pred_online_names_dt, y_pred_online_names_nb, y_pred_online_names_rf, y_pred_online_names_mlp, y_pred_online_names_gb, y_pred_online_names_knn]
+            results = []
             logging.debug("{:<20}  {:<20}  {:<20}  {:<20}      {:<20}   {:<20}   {}".format("*************" ,"***********","*************","*********************","************","***********", "*****************"))
             logging.debug("{:<20}  {:<20}  {:<20}  {:<20}      {:<20}   {:<20}   {}".format("Decision Tree" , "Nayve Bayes" ,"Random Forest", "MultiLayer Perceptron","GradienBoost" ,"    KNN    ", "Comparison result"))
             logging.debug("{:<20}  {:<20}  {:<20}  {:<20}      {:<20}   {:<20}   {}".format("*************" ,"***********","*************","*********************","************","***********", "*****************"))
             for idx in dfonline.index:
                 validation = (y_pred_online_rf[idx] == y_pred_online_nb[idx] == y_pred_online_dt[idx] == y_pred_online_mlp[idx] == y_pred_online_gb[idx] == y_pred_online_knn[idx])
                 logging.debug("{:<20}  {:<20}  {:<20}  {:<20}       {:<20}   {:<20}   {}".format(y_pred_online_names_dt[idx],y_pred_online_names_nb[idx],y_pred_online_names_rf[idx],y_pred_online_names_mlp[idx],y_pred_online_names_gb[idx],y_pred_online_names_knn[idx],validation))
-
-            classifiers = ['Decision Tree', 'Nayve Bayes', 'Random Forest', 'MultiLayer Perceptron', 'GradienBoost', 'KNN']
-            predictions = [y_pred_online_names_dt, y_pred_online_names_nb, y_pred_online_names_rf, y_pred_online_names_mlp, y_pred_online_names_gb, y_pred_online_names_knn]
-
-            results = []
-            for idx in range(len(predictions[0])):  # Asume que todas las listas de predicciones tienen la misma longitud
                 result = {}
                 for classifier, prediction_list in zip(classifiers, predictions):
                     result[classifier] = prediction_list[idx]
-                results.append(result)
+                results.append(result)                
+#            for idx in range(len(predictions[0])):  # Asume que todas las listas de predicciones tienen la misma longitud
+#                result = {}
+#                for classifier, prediction_list in zip(classifiers, predictions):
+#                    result[classifier] = prediction_list[idx]
+#                results.append(result)
             return results
         except Exception as e:
             logging.debug(e)

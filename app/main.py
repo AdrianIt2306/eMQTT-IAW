@@ -11,7 +11,8 @@ import json
 load_dotenv() 
 app = FastAPI()
 router = APIRouter()
-logging.basicConfig(filename=(os.getenv('LOG_FILE')), encoding='utf-8', level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d | %(message)s')
+#logging.basicConfig(filename=(os.getenv('LOG_FILE')), encoding='utf-8', level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d | %(message)s')
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d | %(message)s')
 
 
 @app.get("/")
@@ -42,4 +43,4 @@ if __name__ == "__main__":
     logging.debug("Creating Predictor object")
     oAnalize = Predictor()
     logging.debug("Created Predictor object")
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000,headers=[("server", "eMQTT Core")])
