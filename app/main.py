@@ -1,12 +1,12 @@
-
 import os
 import pickle
 import uvicorn
 import logging
-from typing import Dict
+import pandas as pd
 from dotenv import load_dotenv
 from routers.predictor import Predictor
-from fastapi import FastAPI,Request,APIRouter
+from fastapi import FastAPI,Request,APIRouter,Body
+import json
 
 load_dotenv() 
 app = FastAPI()
@@ -19,8 +19,8 @@ async def root():
     return {"message": "Hello World"}
 
 @router.post("/analize/")
-async def analize(packet_raw: Dict):
-    result = oAnalize.analyze_packet(clf, clfrf, modelmlp, gnb, modelgb, clf_knn, packet_raw)
+async def analize(str = Body()):
+    result = oAnalize.analyze_packet(clf, clfrf, modelmlp, gnb, modelgb, clf_knn, str)
     return result
 
 app.include_router(router)
